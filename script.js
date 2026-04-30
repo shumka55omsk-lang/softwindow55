@@ -6,7 +6,7 @@ const CONFIG = {
   whatsapp: "79039812452",
 
   // Замените username на свой Telegram, например: https://t.me/okna_omsk
-  telegramUrl: "https://t.me/@Anvar_company",
+  telegramUrl: "https://t.me/anvar_company",
 
   // Ваша ранее указанная ссылка Max. При необходимости замените.
   maxUrl: "https://max.ru/u/f9LHodD0cOLj76aZjFESkEjxSbv_ofti1cN5XI0YOvDp1yXr_IPVvSgBW5s"
