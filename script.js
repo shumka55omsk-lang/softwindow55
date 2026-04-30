@@ -1,61 +1,24 @@
 const CONFIG = {
   phoneDisplay: "48-98-78",
   phoneTel: "+73812489878",
-
-  // Замените на свой номер WhatsApp в международном формате без плюса.
-  whatsapp: "73812489878",
-
-  // Прямая ссылка на личный Telegram-профиль
+  whatsappUrl: "https://wa.me/73812489878?text=%D0%97%D0%B4%D1%80%D0%B0%D0%B2%D1%81%D1%82%D0%B2%D1%83%D0%B9%D1%82%D0%B5%21%20%D0%A5%D0%BE%D1%87%D1%83%20%D1%80%D0%B0%D1%81%D1%81%D1%87%D0%B8%D1%82%D0%B0%D1%82%D1%8C%20%D0%BC%D1%8F%D0%B3%D0%BA%D0%B8%D0%B5%20%D0%BE%D0%BA%D0%BD%D0%B0%20%D0%B2%20%D0%9E%D0%BC%D1%81%D0%BA%D0%B5.",
   telegramUrl: "https://t.me/Anvar_company",
-
-  // Ваша ранее указанная ссылка Max. При необходимости замените.
   maxUrl: "https://max.ru/u/f9LHodD0cOLj76aZjFESkEjxSbv_ofti1cN5XI0YOvDp1yXr_IPVvSgBW5s"
 };
 
-const defaultText = encodeURIComponent("Здравствуйте! Хочу рассчитать мягкие окна в Омске.");
-const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${defaultText}`;
-
-["waLink", "waFooter", "waMobile"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.href = waUrl;
-});
-function setTelegramLinks(url) {
-  ["tgLink", "tgFooter"].forEach(id => {
+function setMessengerLinks(ids, url) {
+  ids.forEach((id) => {
     const el = document.getElementById(id);
     if (!el) return;
-
-    el.href = url || "#";
-
-    if (!url) {
-      el.setAttribute("aria-disabled", "true");
-      el.title = "Telegram-ссылка загрузится после деплоя на Vercel";
-    } else {
-      el.removeAttribute("aria-disabled");
-      el.title = "";
-    }
+    el.href = url;
+    el.target = "_blank";
+    el.rel = "nofollow noopener";
   });
 }
 
-setTelegramLinks(CONFIG.telegramUrl);
-
-async function initTelegramLink() {
-  try {
-    const response = await fetch("/api/telegram-link");
-    const data = await response.json();
-
-    if (data.ok && data.url) {
-      setTelegramLinks(data.url);
-    }
-  } catch (error) {
-    // При локальном открытии index.html API Vercel недоступен — это нормально.
-  }
-}
-
-// initTelegramLink отключен: кнопка ведет напрямую на @Anvar_company
-["maxLink", "maxFooter"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.href = CONFIG.maxUrl;
-});
+setMessengerLinks(["waLink", "waFooter", "waMobile"], CONFIG.whatsappUrl);
+setMessengerLinks(["tgLink", "tgFooter"], CONFIG.telegramUrl);
+setMessengerLinks(["maxLink", "maxFooter"], CONFIG.maxUrl);
 
 const windowsList = document.getElementById("windowsList");
 const addWindow = document.getElementById("addWindow");
