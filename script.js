@@ -5,9 +5,8 @@ const CONFIG = {
   // Замените на свой номер WhatsApp в международном формате без плюса.
   whatsapp: "73812489878",
 
-  // Telegram-ссылка подтягивается автоматически через /api/telegram-link
-  // на основе TELEGRAM_BOT_TOKEN в Vercel. Можно оставить пустой.
-  telegramUrl: "",
+  // Прямая ссылка на личный Telegram-профиль
+  telegramUrl: "https://t.me/Anvar_company",
 
   // Ваша ранее указанная ссылка Max. При необходимости замените.
   maxUrl: "https://max.ru/u/f9LHodD0cOLj76aZjFESkEjxSbv_ofti1cN5XI0YOvDp1yXr_IPVvSgBW5s"
@@ -52,7 +51,7 @@ async function initTelegramLink() {
   }
 }
 
-initTelegramLink();
+// initTelegramLink отключен: кнопка ведет напрямую на @Anvar_company
 ["maxLink", "maxFooter"].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.href = CONFIG.maxUrl;

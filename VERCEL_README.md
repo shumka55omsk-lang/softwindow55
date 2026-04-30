@@ -60,3 +60,14 @@ https://ваш-домен/api/telegram-link
 ```
 
 Важно: при открытии `index.html` двойным кликом на ПК ссылка Telegram может не подтянуться, потому что `/api/telegram-link` работает на Vercel.
+
+
+## Telegram-кнопка
+
+Кнопка Telegram настроена на прямой личный профиль:
+
+```text
+https://t.me/Anvar_company
+```
+
+Она не ведет на бота. Отправка формы заявки в Telegram через Vercel при этом остается через `api/send-telegram.js`.
