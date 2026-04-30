@@ -3,10 +3,10 @@ const CONFIG = {
   phoneTel: "+73812489878",
 
   // Замените на свой номер WhatsApp в международном формате без плюса.
-  whatsapp: "73812489878",
+  whatsapp: "79039812452",
 
   // Замените username на свой Telegram, например: https://t.me/okna_omsk
-  telegramUrl: "https://t.me/your_username",
+  telegramUrl: "https://t.me/anvar_company",
 
   // Ваша ранее указанная ссылка Max. При необходимости замените.
   maxUrl: "https://max.ru/u/f9LHodD0cOLj76aZjFESkEjxSbv_ofti1cN5XI0YOvDp1yXr_IPVvSgBW5s"
