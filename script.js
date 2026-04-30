@@ -3,10 +3,11 @@ const CONFIG = {
   phoneTel: "+73812489878",
 
   // Замените на свой номер WhatsApp в международном формате без плюса.
-  whatsapp: "79039812452",
+  whatsapp: "73812489878",
 
-  // Замените username на свой Telegram, например: https://t.me/okna_omsk
-  telegramUrl: "https://t.me/anvar_company",
+  // Telegram-ссылка подтягивается автоматически через /api/telegram-link
+  // на основе TELEGRAM_BOT_TOKEN в Vercel. Можно оставить пустой.
+  telegramUrl: "",
 
   // Ваша ранее указанная ссылка Max. При необходимости замените.
   maxUrl: "https://max.ru/u/f9LHodD0cOLj76aZjFESkEjxSbv_ofti1cN5XI0YOvDp1yXr_IPVvSgBW5s"
@@ -19,10 +20,39 @@ const waUrl = `https://wa.me/${CONFIG.whatsapp}?text=${defaultText}`;
   const el = document.getElementById(id);
   if (el) el.href = waUrl;
 });
-["tgLink", "tgFooter"].forEach(id => {
-  const el = document.getElementById(id);
-  if (el) el.href = CONFIG.telegramUrl;
-});
+function setTelegramLinks(url) {
+  ["tgLink", "tgFooter"].forEach(id => {
+    const el = document.getElementById(id);
+    if (!el) return;
+
+    el.href = url || "#";
+
+    if (!url) {
+      el.setAttribute("aria-disabled", "true");
+      el.title = "Telegram-ссылка загрузится после деплоя на Vercel";
+    } else {
+      el.removeAttribute("aria-disabled");
+      el.title = "";
+    }
+  });
+}
+
+setTelegramLinks(CONFIG.telegramUrl);
+
+async function initTelegramLink() {
+  try {
+    const response = await fetch("/api/telegram-link");
+    const data = await response.json();
+
+    if (data.ok && data.url) {
+      setTelegramLinks(data.url);
+    }
+  } catch (error) {
+    // При локальном открытии index.html API Vercel недоступен — это нормально.
+  }
+}
+
+initTelegramLink();
 ["maxLink", "maxFooter"].forEach(id => {
   const el = document.getElementById(id);
   if (el) el.href = CONFIG.maxUrl;

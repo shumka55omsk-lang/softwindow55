@@ -31,3 +31,32 @@ TELEGRAM_CHAT_ID
 /api/check-telegram
 
 Если `telegramBotTokenConfigured` и `telegramChatIdConfigured` равны `true`, отправка формы готова.
+
+
+## Исправление кнопки Telegram
+
+В этой версии кнопка Telegram получает ссылку автоматически через `/api/telegram-link`.
+
+Vercel берёт `TELEGRAM_BOT_TOKEN`, запрашивает username бота и отдаёт на сайт ссылку вида:
+
+```text
+https://t.me/username_бота
+```
+
+Проверка после деплоя:
+
+```text
+https://ваш-домен/api/telegram-link
+```
+
+Должно вернуться:
+
+```json
+{
+  "ok": true,
+  "username": "имя_бота",
+  "url": "https://t.me/имя_бота"
+}
+```
+
+Важно: при открытии `index.html` двойным кликом на ПК ссылка Telegram может не подтянуться, потому что `/api/telegram-link` работает на Vercel.
